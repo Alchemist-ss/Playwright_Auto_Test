@@ -8,14 +8,49 @@
 - [Использование](#использование)
 - [Примеры](#примеры)
 - [Команды для тестирования](#команды-для-тестирования)
-- [Вклад в проект](#вклад-в-проект)
 - [Лицензия](#лицензия)
 
 ## Установка
 
 1. Клонируйте репозиторий:
-   git clone https://github.com/Alchemist-ss/Playwright_Auto_Test.git
+```bash
+   https://github.com/Alchemist-ss/Playwright_Auto_Test.git
+```
 
 2. Перейдите в директорию проекта:
+```bash   
    cd your-project
+```
 
+3. Установите зависимости:
+```bash   
+   npm install
+```
+
+4. Установите Playwright:
+```bash   
+   npm init playwright@latest
+```
+
+## Использование
+
+Чтобы запустить тесты, выполните следующую команду:
+```bash   
+   npx playwright test
+```
+
+## Примеры
+Тут будут примеры кода и описания, как использовать Playwright для написания автотестов, так же, эта ифнормация может быть найдена в [документации Playwright](https://playwright.dev/docs/intro).
+
+## Команды для тестирования
+```npm test```: Запускает все тесты.
+
+```npm run test:chrome```: Запускает тесты в браузере Google Chrome.
+
+```npm run test:firefox```: Запускает тесты в браузере Mozilla Firefox.
+
+```npm run test:webkit```: Запускает тесты в браузере Apple WebKit.
+
+## Лицензия
+
+Этот проект лицензирован в соответствии с лицензией MIT - подробности см. в файле [LICENSE](https://elicense.kz/).
