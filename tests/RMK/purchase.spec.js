@@ -22,17 +22,18 @@ async function performAuthorization(page) {
   await page.getByRole('button', { name: 'Войти' }).click()
 }
 
-// Авторизация (позитивный сценарий)
-test('Authorization', async ({ page }) => {
+// Продажа РМК (наличка)
+test('PurchaseCash', async ({ page }) => {
   await performAuthorization(page);
-
   // Проверить, что URL изменился
-  await expect(page).toHaveURL('https://stage.uchet24.kz')
-
-  // Ожидание нескольких элементов с использованием Promise.all()
-  await Promise.all([
-    expect(page.getByRole('link', { name: 'Инструкция' })).toHaveText('Инструкция'),
-    expect(page.getByRole('link', { name: 'Пользовательское соглашение' })).toHaveText('Пользовательское соглашение'),
-    expect(page.getByRole('link', { name: '© 2022 TOO “DISS-GROUP”' })).toHaveText('© 2022 TOO “DISS-GROUP”')
-  ]);
+  await expect(page).toHaveURL('https://stage.uchet24.kz');
+  await page.getByRole('link', { name: 'РМК' }).click();
+  await expect(page).toHaveURL('https://stage.uchet24.kz/rmk');
+  await page.getByRole('button', { name: 'Без категории' }).click();
+  await page.getByRole('button', { name: '+' }).nth(1).click();
+  await page.getByRole('button', { name: 'Оплата' }).click();
+  await page.getByRole('button', { name: 'Подтвердить' }).click();
+  await page.getByRole('button', { name: 'Подтвердить' }).click();
+  // Дописать когда пофиксят
+  await page.waitForTimeout(2000)
 });

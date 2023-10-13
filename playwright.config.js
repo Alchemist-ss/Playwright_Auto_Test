@@ -26,10 +26,12 @@ module.exports = defineConfig({
   use: {
     /* Сбор трассировки при повторе неудачного теста. См. https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    /* Включение видео записи */
     video: {
       mode: 'on',
       size: { width: 1920, height: 1080 },
     },
+    // Включение скиншотов
     screenshot: 'on',
 
 
