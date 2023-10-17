@@ -1,34 +1,20 @@
 import { test, expect } from '@playwright/test';
 import { getStageUrl } from '../../helper/getroute.js';
-
+import { performAuthorization } from '../ServiceFunctions/auth.js';
 
 // Открытие страницы
 test.beforeEach(async ({ page }) => {
-  // Переход на страницу TIS-Stage
   await page.goto(getStageUrl());
-  // Перейти в полноэкранный режим
   await page.setViewportSize({ width: 1920, height: 1080 })
 });
-
-// Функция для авторизации
-async function performAuthorization(page) {
-  // Найти и вписать значение
-  await page.getByPlaceholder('Введите email').fill('t.alchemist@mail.ru')
-
-  // Найти и вписать значение
-  await page.getByPlaceholder('Введите пароль').fill('Иыsv856@$#')
-
-  // Нажатие на кнопку
-  await page.getByRole('button', { name: 'Войти' }).click()
-}
 
 // Генерация случайного целого числа в диапазоне от min до max (включительно)
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// Продажа РМК (наличка)
-test('PurchaseCash', async ({ page }) => {
+// Продажа юр. лицу
+test('SaleToLegalEntity', async ({ page }) => {
   const randomNumber = getRandomInt(1, 10);
   await performAuthorization(page);
   // Проверить, что URL изменился
@@ -47,5 +33,18 @@ test('PurchaseCash', async ({ page }) => {
   await page.getByPlaceholder('0,000').fill(randomNumber.toString());
   await page.getByRole('button', { name: 'Записать' }).click();
   await expect(page.getByText('Операция успешно создана!')).toHaveText('Операция успешно создана!')
-  await page.waitForTimeout(2000)
+  // Взять текущую дату
+  const currentDate = new Date();
+
+  // Преобразовать текущую дату в строку в том же формате, который ожидается на странице
+  const currentDateStr = currentDate.toLocaleDateString();
+
+  // Ваш код для выбора элемента с датой
+  const dateElement = await page.getByRole('cell', { name: currentDateStr }).first();
+
+  // Получить текст из элемента
+  const dateOnPage = await dateElement.textContent();
+
+  // Проверить, что дата на странице содержит текущую дату
+  await expect(dateOnPage).toContain(currentDateStr);
 });

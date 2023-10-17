@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { getStageUrl } from '../../helper/getroute.js';
+import { performAuthorization } from '../ServiceFunctions/auth.js';
 
 
 // Открытие страницы
@@ -9,18 +10,6 @@ test.beforeEach(async ({ page }) => {
   // Перейти в полноэкранный режим
   await page.setViewportSize({ width: 1920, height: 1080 })
 });
-
-// Функция для авторизации
-async function performAuthorization(page) {
-  // Найти и вписать значение
-  await page.getByPlaceholder('Введите email').fill('t.alchemist@mail.ru')
-
-  // Найти и вписать значение
-  await page.getByPlaceholder('Введите пароль').fill('Иыsv856@$#')
-
-  // Нажатие на кнопку
-  await page.getByRole('button', { name: 'Войти' }).click()
-}
 
 // Авторизация (позитивный сценарий)
 test('Authorization', async ({ page }) => {
