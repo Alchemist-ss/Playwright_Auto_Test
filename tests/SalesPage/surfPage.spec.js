@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { getStageUrl } from '../../helper/getroute.js';
-import { performAuthorization } from 'C:/Users/user/Documents/GitHub/Playwright_Auto_Test/tests/Authentication/autorisation.spec.js'
+import { performAuthorization } from '../ServiceFunctions/auth.js';
+import { getRandomInt } from '../ServiceFunctions/intRandom.js';
 
 // Открытие страницы
 test.beforeEach(async ({ page }) => {
@@ -10,5 +11,6 @@ test.beforeEach(async ({ page }) => {
 
 test('surfPage', async ({ page }) => {
   await performAuthorization(page)
+  
 });
 

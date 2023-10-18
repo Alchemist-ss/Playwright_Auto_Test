@@ -9,3 +9,4 @@ export async function performAuthorization(page) {
   // Нажатие на кнопку
   await page.getByRole('button', { name: 'Войти' }).click()
 }
+
