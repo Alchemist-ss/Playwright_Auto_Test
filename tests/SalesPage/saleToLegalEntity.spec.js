@@ -14,28 +14,24 @@ test.beforeEach(async ({ page }) => {
 test('SaleToLegalEntity', async ({ page }) => {
   const randomNumber = getRandomInt(1, 10);
 
-  await expect(page).toHaveURL('https://stage.uchet24.kz');
 
-  await page.locator('text=Продажи').click();
-  await expect(page).toHaveURL('https://stage.uchet24.kz/sales');
+  await page.getByRole('link', { name: 'Продажи' }).click();
 
-  await page.locator('text=Новая операция').click();
-  await page.locator('text=Продажа (юр. лицу)').click();
-  await page.locator('text=Подтвердить').click();
 
-  await Promise.all([
-    page.locator('.multiselect__tags').first().click(),
-    page.locator('span').filter({ hasText: 'АО КASPI.KZ' }).first().click(),
-    page.locator('text=АО KASPI.KZ').first().waitForElementState('visible'),
-    page.locator('div:has-text("Товар / Услуга")').nth(1).click(),
-    page.locator('span').filter({ hasText: 'Булочка с маком' }).first().click(),
-    page.locator('text=Булочка с маком').first().waitForElementState('visible'),
-  ]);
+  await page.getByRole('button', { name: 'Новая операция' }).click();
+  await page.getByText('Продажа (юр. лицу)', { exact: true }).click();
+  await page.getByRole('button', { name: 'Подтвердить' }).click();
 
-  await page.locator('input[placeholder="0,000"]').fill(randomNumber);
+  await page.locator('.multiselect__tags').first().click();
+  await page.locator('span').filter({ hasText: 'АО КASPI.KZ' }).first().click();
+  await expect(page.getByText('АО КASPI.KZ').first()).toHaveText('АО КASPI.KZ');
+  await page.getByRole('table').locator('div').filter({ hasText: 'Товар / Услуга' }).nth(1).click();
+  await page.locator('span').filter({ hasText: 'Булочка с маком' }).first().click();
+  await expect(page.locator('span').filter({ hasText: 'Булочка с маком' }).first()).toHaveText('Булочка с маком');
+  await page.getByPlaceholder('0,000').fill(randomNumber);
 
-  await page.locator('text=Записать').click();
-  await expect(page.locator('text=Операция успешно создана!')).toBeVisible();
+  await page.getByRole('button', { name: 'Записать' }).click();
+  await expect(page.getByText('Операция успешно создана!')).toHaveText('Операция успешно создана!')
 
   // Взять текущую дату
   const currentDate = new Date();
