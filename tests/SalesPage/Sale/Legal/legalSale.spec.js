@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { getStageUrl } from '../../helper/getroute.js';
-import { performAuthorization } from '../ServiceFunctions/auth.js';
-import { getRandomInt } from '../ServiceFunctions/intRandom.js';
+import { getStageUrl } from '../../../../helper/getroute.js';
+
+import { getRandomInt } from '../../../ServiceFunctions/intRandom.js';
+import { performAuthorization } from '../../../ServiceFunctions/auth.js';
+import { checkDate } from '../../../ServiceFunctions/checkDate.js'
 
 // Открытие страницы и авторизация
 test.beforeEach(async ({ page }) => {
@@ -11,7 +13,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 // Продажа юр. лицу
-test('SaleToLegalEntity', async ({ page }) => {
+test('legalSale', async ({ page }) => {
   const randomNumber = getRandomInt(1, 10);
 
 
@@ -33,14 +35,7 @@ test('SaleToLegalEntity', async ({ page }) => {
   await page.getByRole('button', { name: 'Записать' }).click();
   await expect(page.getByText('Операция успешно создана!')).toHaveText('Операция успешно создана!')
 
-  // Взять текущую дату
-  const currentDate = new Date();
-  // Преобразовать текущую дату в строку в том же формате, который ожидается на странице
-  const currentDateStr = currentDate.toLocaleDateString();
-  // Ваш код для выбора элемента с датой
-  const dateElement = await page.locator('text=' + currentDateStr).first();
-  // Получить текст из элемента
-  const dateOnPage = await dateElement.textContent();
-  // Проверить, что дата на странице содержит текущую дату
-  await expect(dateOnPage).toContain(currentDateStr);
+  // Проверка даты
+  const isDateCorrect = await checkDate(page);
+  await expect(isDateCorrect).toBe(true);
 });

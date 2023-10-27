@@ -56,6 +56,15 @@ module.exports = defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
+    /* Тестирование в брендированных браузерах. */
+    {
+      name: 'Microsoft Edge',
+      use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    },
+    {
+      name: 'Google Chrome',
+      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    },
 
     /* Тестирование на мобильных устройствах. */
     // {
@@ -65,23 +74,13 @@ module.exports = defineConfig({
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Тестирование в брендированных браузерах. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    // },    
   ],
 
-  /* Запуск локального сервера разработки перед запуском тестов. */
+  // /* Запуск локального сервера разработки перед запуском тестов. */
   // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://127.0.0.1:3000',
-  //   reuseExistingServer: !process.env.CI,
+  // command: 'npm run start',
+  // url: 'http://127.0.0.1:3000',
+  // reuseExistingServer: !process.env.CI,
   // },
 });
