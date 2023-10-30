@@ -68,8 +68,8 @@ test('mixedRetailSale', async ({ page }) => {
   await page.getByPlaceholder('0,000').fill('5');
 
   await page.getByRole('button', { name: 'Смешанно' }).click()
-  await page.getByPlaceholder('0,00').nth(3).fill('1125')
-  await page.getByPlaceholder('0,00').nth(4).fill('1125')
+  await page.getByPlaceholder('0,00').nth(3).fill('2625')
+  await page.getByPlaceholder('0,00').nth(4).fill('2625')
   await getCheck(page)
 
   // Проверка даты
