@@ -11,7 +11,7 @@ require('dotenv').config();
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
-  timeout: 60000,
+  timeout: 0, // Раскоментить тогда когда будут фулл авто тесты
   testDir: './tests',
   /* Запуск тестов в параллели */
   fullyParallel: true,
