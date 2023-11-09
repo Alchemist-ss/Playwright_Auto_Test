@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { getStageUrl } from '../../../../helper/getroute.js';
+import { getStageUrl } from '../../../../../helper/getroute.js';
 
-import { getRandomInt } from '../../../ServiceFunctions/intRandom.js';
-import { performAuthorization } from '../../../ServiceFunctions/auth.js';
-import { checkDate } from '../../../ServiceFunctions/checkDate.js';
+import { getRandomInt } from '../../../../ServiceFunctions/intRandom.js';
+import { performAuthorization } from '../../../../ServiceFunctions/auth.js';
+import { checkDate } from '../../../../ServiceFunctions/checkDate.js';
 
 
 // Открытие страницы и авторизация
@@ -21,6 +21,7 @@ async function saleRetail(page) {
   await page.getByRole('button', { name: 'Подтвердить' }).click();
 
   await expect(page.locator('.multiselect__tags').filter({ hasText: 'Касса ТИС новая' }).first()).toHaveText('Касса ТИС новая');
+  await page.waitForTimeout(1000)
   await expect(page.locator('div:nth-child(2) > .field > .control > .multiselect > .multiselect__tags')).toHaveText('Склад "Про100кулл"')
   await page.getByRole('table').locator('div').filter({ hasText: 'Товар / Услуга' }).nth(1).click();
   await page.locator('span').filter({ hasText: 'Булочка с маком' }).first().click();

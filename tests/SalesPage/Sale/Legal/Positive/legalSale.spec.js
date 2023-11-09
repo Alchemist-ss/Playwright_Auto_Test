@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { getStageUrl } from '../../../../helper/getroute.js';
+import { getStageUrl } from '../../../../../helper/getroute.js';
 
-import { getRandomInt } from '../../../ServiceFunctions/intRandom.js';
-import { performAuthorization } from '../../../ServiceFunctions/auth.js';
-import { checkDate } from '../../../ServiceFunctions/checkDate.js'
+import { getRandomInt } from '../../../../ServiceFunctions/intRandom.js';
+import { performAuthorization } from '../../../../ServiceFunctions/auth.js';
+import { checkDate } from '../../../../ServiceFunctions/checkDate.js'
 
 // Открытие страницы и авторизация
 test.beforeEach(async ({ page }) => {

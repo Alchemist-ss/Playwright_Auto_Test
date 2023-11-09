@@ -24,19 +24,25 @@ async function performSalesAction(page, label, expectedURL) {
 
 test('surfSalesPage', async ({ page }) => {
   await expect(page).toHaveURL('https://stage.uchet24.kz');
+  await page.waitForTimeout(1000)
 
   // Продажа (юр. лицу)
   await performSalesAction(page, 'Продажа (юр. лицу)', 'https://stage.uchet24.kz/sales/new');
+  await page.waitForTimeout(1000)
 
   // Продажа (розница)
   await performSalesAction(page, 'Продажа (розница)', 'https://stage.uchet24.kz/sales/retail-new');
+  await page.waitForTimeout(1000)
 
   // Счет на оплату
   await performSalesAction(page, 'Счет на оплату', 'https://stage.uchet24.kz/sales/bill');
+  await page.waitForTimeout(1000)
 
   // Возврат (юр. лицу)
   await performSalesAction(page, 'Возврат', 'https://stage.uchet24.kz/sales/return');
+  await page.waitForTimeout(1000)
 
   // Возврат продажи (розница)
   await performSalesAction(page, 'Возврат продажи (розница)', 'https://stage.uchet24.kz/sales/retail-return');
+  await page.waitForTimeout(1000)
 });

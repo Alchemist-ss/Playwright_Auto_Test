@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { getStageUrl } from '../../../../helper/getroute.js';
-
-import { performAuthorization } from '../../../ServiceFunctions/auth.js';
-
+import { getStageUrl } from '../../../../../helper/getroute.js';
+import { performAuthorization } from '../../../../ServiceFunctions/auth.js';
 
 // Открытие страницы и авторизация
 test.beforeEach(async ({ page }) => {
@@ -11,9 +9,9 @@ test.beforeEach(async ({ page }) => {
   await performAuthorization(page);
 });
 
+// Общие шаги
 async function saleRetail(page) {
   await page.getByRole('link', { name: 'Продажи' }).click();
-
   await page.getByRole('button', { name: 'Новая операция' }).click();
   await page.locator('span').filter({ hasText: 'Продажа (розница)' }).click();
   await page.getByRole('button', { name: 'Подтвердить' }).click();
@@ -24,29 +22,25 @@ async function saleRetail(page) {
 
 async function getCheck(page) {
   await page.getByRole('button', { name: 'Пробить чек' }).click();
-  await expect(page.getByText('Оплата не может быть нулем')).toHaveText('Оплата не может быть нулем')
+  await expect(page.getByText('Оплата не может быть нулем')).toHaveText('Оплата не может быть нулем');
 }
 
 // Продажа розница
-test('cashRetailUnspecQuantity', async ({ page }) => {
-  await saleRetail(page)
-
-  await getCheck(page)
+test('cashRetailEmptyQuantity', async ({ page }) => {
+  await saleRetail(page);
+  await getCheck(page);
 });
 
-test('cardRetailSale', async ({ page }) => {
-  await saleRetail(page)
+test('cardRetailEmptyQuantity', async ({ page }) => {
+  await saleRetail(page);
+  await page.getByRole('button', { name: 'Картой' }).click();
+  await getCheck(page);
+});
 
-
-  await page.getByRole('button', { name: 'Картой' }).click()
-  await getCheck(page)
-})
-
-test('mixedRetailSale', async ({ page }) => {
-  await saleRetail(page)
-
-  await page.getByRole('button', { name: 'Смешанно' }).click()
-  await page.getByPlaceholder('0,00').nth(3).fill('2625')
-  await page.getByPlaceholder('0,00').nth(4).fill('2625')
-  await getCheck(page)
-})
+test('mixedRetailEmptyQuantity', async ({ page }) => {
+  await saleRetail(page);
+  await page.getByRole('button', { name: 'Смешанно' }).click();
+  await page.getByPlaceholder('0,00').nth(3).fill('2625');
+  await page.getByPlaceholder('0,00').nth(4).fill('2625');
+  await getCheck(page);
+});

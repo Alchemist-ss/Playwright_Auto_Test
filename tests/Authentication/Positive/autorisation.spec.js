@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { getStageUrl } from '../../helper/getroute.js';
-import { performAuthorization } from '../ServiceFunctions/auth.js';
+import { getStageUrl } from '../../../helper/getroute.js';
+import { performAuthorization } from '../../ServiceFunctions/auth.js';
 
 
 // Открытие страницы

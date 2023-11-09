@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { getStageUrl } from '../../../../helper/getroute.js';
+import { getStageUrl } from '../../../../../helper/getroute.js';
 
-import { getRandomInt } from '../../../ServiceFunctions/intRandom.js';
-import { performAuthorization } from '../../../ServiceFunctions/auth.js';
+import { getRandomInt } from '../../../../ServiceFunctions/intRandom.js';
+import { performAuthorization } from '../../../../ServiceFunctions/auth.js';
 // import { checkDate } from '../checkDate.js';
 
 // Открытие страницы и авторизация

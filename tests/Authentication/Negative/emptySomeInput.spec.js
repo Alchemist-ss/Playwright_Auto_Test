@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { getStageUrl } from '../../helper/getroute.js';
+import { getStageUrl } from '../../../helper/getroute.js';
 
 // Открытие страницы и настройка перед каждым тестом
 test.beforeEach(async ({ page }) => {
