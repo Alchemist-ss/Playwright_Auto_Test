@@ -22,7 +22,8 @@ async function saleRetail(page) {
 
 async function getCheck(page) {
   await page.getByRole('button', { name: 'Пробить чек' }).click();
-  await expect(page.getByText('Оплата не может быть нулем')).toHaveText('Оплата не может быть нулем');
+  await page.waitForSelector('text=Необходимо заполнить все поля')
+  await expect(page.getByText('Необходимо заполнить все поля')).toHaveText('Необходимо заполнить все поля')
 }
 
 // Продажа розница
@@ -40,7 +41,7 @@ test('cardRetailEmptyQuantity', async ({ page }) => {
 test('mixedRetailEmptyQuantity', async ({ page }) => {
   await saleRetail(page);
   await page.getByRole('button', { name: 'Смешанно' }).click();
-  await page.getByPlaceholder('0,00').nth(3).fill('2625');
-  await page.getByPlaceholder('0,00').nth(4).fill('2625');
+  await page.getByPlaceholder('0').nth(3).fill('0');
+  await page.getByPlaceholder('0').nth(4).fill('0');
   await getCheck(page);
 });

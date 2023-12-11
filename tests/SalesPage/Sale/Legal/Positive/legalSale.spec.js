@@ -30,9 +30,10 @@ test('legalSale', async ({ page }) => {
   await page.getByRole('table').locator('div').filter({ hasText: 'Товар / Услуга' }).nth(1).click();
   await page.locator('span').filter({ hasText: 'Булочка с маком' }).first().click();
   await expect(page.locator('span').filter({ hasText: 'Булочка с маком' }).first()).toHaveText('Булочка с маком');
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
 
   await page.getByRole('button', { name: 'Записать' }).click();
+  await page.waitForSelector('text=Операция успешно создана!')
   await expect(page.getByText('Операция успешно создана!')).toHaveText('Операция успешно создана!')
 
   // Проверка даты

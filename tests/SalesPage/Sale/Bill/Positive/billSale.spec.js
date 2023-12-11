@@ -36,7 +36,7 @@ test('billSale', async ({ page }) => {
   await page.locator('#mainContent div').filter({ hasText: 'Товар/Услуга' }).nth(4).click();
   await page.locator('span').filter({ hasText: 'Булочка с маком' }).first().click();
   await expect(page.locator('span').filter({ hasText: 'Булочка с маком' }).first()).toHaveText('Булочка с маком');
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
 
   await page.getByRole('button', { name: 'Записать' }).click();
 

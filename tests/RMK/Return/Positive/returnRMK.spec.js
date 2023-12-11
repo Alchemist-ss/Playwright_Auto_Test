@@ -20,8 +20,9 @@ test('returnRMK', async ({ page }) => {
   await page.waitForTimeout(1000)
   await page.locator('span').filter({ hasText: /Продажа № \d+/ }).first().click();
   await page.waitForTimeout(1000)
-  await page.getByRole('button', { name: 'Подтвердить' }).click()
   await page.getByRole('button', { name: 'Подтвердить' }).click();
+  await page.getByRole('button', { name: 'Подтвердить' }).click();
+  await page.waitForSelector(`text=Операция успешно создана!`);
   await expect(page.getByText('Операция успешно создана!')).toHaveText('Операция успешно создана!')
 
   // закрытие чека

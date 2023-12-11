@@ -31,6 +31,7 @@ test('retailReturn', async ({ page }) => {
   await expect(page.getByRole('rowgroup').locator('div').filter({ hasText: 'Булочка с маком' }).nth(1)).toHaveText('Булочка с маком')
 
   await page.getByRole('button', { name: 'Пробить чек' }).click();
+  await page.waitForSelector('text=Операция успешно создана!')
   await expect(page.getByText('Операция успешно создана!')).toHaveText('Операция успешно создана!')
   await page.getByRole('button', { name: 'Закрыть' }).click();
 

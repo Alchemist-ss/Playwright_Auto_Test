@@ -46,6 +46,7 @@ async function deletUnit(page) {
 
 async function getCheck(page) {
   await page.getByRole('button', { name: 'Пробить чек' }).click();
+  await page.waitForSelector('text=Необходимо заполнить все поля')
   await expect(page.getByText('Необходимо заполнить все поля')).toHaveText('Необходимо заполнить все поля')
 }
 
@@ -56,13 +57,13 @@ test('cashRetailEmptyFields', async ({ page }) => {
 
   // Отсутствие "Кассы"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
   await deleteKassa(page)
   await getCheck(page)
 
   // Отсутствие "Склада"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
   await deletStore(page)
   await getCheck(page)
 
@@ -76,7 +77,7 @@ test('cashRetailEmptyFields', async ({ page }) => {
 
   // Отсутствие "Ед. измерения"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
   await deletUnit(page)
   await getCheck(page)
 });
@@ -88,13 +89,13 @@ test('cardRetailEmptyFields', async ({ page }) => {
 
   // Отсутствие "Кассы"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
   await deleteKassa(page)
   await getCheck(page)
 
   // Отсутствие "Склада"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
   await deletStore(page)
   await getCheck(page)
 
@@ -108,7 +109,7 @@ test('cardRetailEmptyFields', async ({ page }) => {
 
   // Отсутствие "Ед. измерения"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
   await deletUnit(page)
   await getCheck(page)
 })
@@ -117,13 +118,13 @@ test('cardRetailEmptyFields', async ({ page }) => {
 test('mixedRetailEmptyFields', async ({ page }) => {
   // Отсутствие "Кассы"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill('5');
+  await page.locator('#product-qty-0').fill('5');
   await deleteKassa(page)
   await getCheck(page)
 
   // Отсутствие "Склада"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill('5');
+  await page.locator('#product-qty-0').fill('5');
   await deletStore(page)
   await getCheck(page)
 
@@ -137,7 +138,7 @@ test('mixedRetailEmptyFields', async ({ page }) => {
 
   // Отсутствие "Ед. измерения"
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill('5');
+  await page.locator('#product-qty-0').fill('5');
   await deletUnit(page)
   await getCheck(page)
 })

@@ -31,6 +31,7 @@ async function saleRetail(page) {
 async function getCheck(page) {
   await page.getByRole('button', { name: 'Пробить чек' }).click();
   await page.getByRole('button', { name: 'Закрыть' }).click();
+  await page.waitForSelector('text=Операция успешно создана!')
   await expect(page.getByText('Операция успешно создана!')).toHaveText('Операция успешно создана!')
 }
 
@@ -39,7 +40,7 @@ test('cashRetailSale', async ({ page }) => {
   const randomNumber = getRandomInt(1, 10);
 
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
 
   await getCheck(page)
 
@@ -52,7 +53,7 @@ test('cardRetailSale', async ({ page }) => {
   const randomNumber = getRandomInt(1, 10);
 
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill(randomNumber);
+  await page.locator('#product-qty-0').fill(randomNumber);
 
 
   await page.getByRole('button', { name: 'Картой' }).click()
@@ -65,11 +66,11 @@ test('cardRetailSale', async ({ page }) => {
 
 test('mixedRetailSale', async ({ page }) => {
   await saleRetail(page)
-  await page.getByPlaceholder('0,000').fill('5');
+  await page.locator('#product-qty-0').fill('5');
 
   await page.getByRole('button', { name: 'Смешанно' }).click()
-  await page.getByPlaceholder('0,00').nth(3).fill('2625')
-  await page.getByPlaceholder('0,00').nth(4).fill('2625')
+  await page.getByPlaceholder('0').nth(3).fill('2625')
+  await page.getByPlaceholder('0').nth(4).fill('2625')
   await getCheck(page)
 
   // Проверка даты
