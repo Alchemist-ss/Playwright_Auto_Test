@@ -22,8 +22,8 @@ async function saleRetail(page) {
 
 async function getCheck(page) {
   await page.getByRole('button', { name: 'Пробить чек' }).click();
-  await page.waitForSelector('text=Необходимо заполнить все поля')
-  await expect(page.getByText('Необходимо заполнить все поля')).toHaveText('Необходимо заполнить все поля')
+  await page.waitForSelector('text=Оплата не может быть нулем')
+  await expect(page.getByText('Оплата не может быть нулем')).toHaveText('Оплата не может быть нулем')
 }
 
 // Продажа розница
